@@ -12,11 +12,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.Model.*;
 
 @Configuration
 @ComponentScan({"com.niit"})
+@EnableTransactionManagement
 public class HibernateConfig {
 	@Autowired
     @Bean(name ="dataSource")

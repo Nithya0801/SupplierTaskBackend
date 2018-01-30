@@ -41,13 +41,13 @@ public class SupplierDaoImpl implements SupplierDao{
 		try
 		{
 		
-		 Session session= sessionFactory.openSession();
+		/* Session session= sessionFactory.openSession();
 			 session.beginTransaction();
 		  session.persist(supplier);
 		  session.getTransaction().commit();
-		  session.close();
+		  session.close();*/
 			
-		//	sessionFactory.getCurrentSession().persist(supplier);
+			sessionFactory.getCurrentSession().persist(supplier);
 			
 		return true;
 		}
@@ -59,54 +59,64 @@ public class SupplierDaoImpl implements SupplierDao{
 	}
 
 	public Supplier getSupplierById(int sid) {
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		
+	//	Session session=sessionFactory.openSession();
+	//	session.beginTransaction();
+		Session session=sessionFactory.getCurrentSession();
 		Supplier supplier=(Supplier)session.load(Supplier.class,new Integer(sid));
-		session.getTransaction().commit();
-		session.close();
+		//session.getTransaction().commit();
+		//session.close();
 		return supplier;
 	}
 
 	public boolean deleteSupplier(int sid) {
 	 
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
+		//Session session=sessionFactory.openSession();
+		//session.beginTransaction();
 		
-		
+		Session session=sessionFactory.getCurrentSession();
 		Supplier supplier=(Supplier)session.load(Supplier.class,new Integer(sid));
 		if(supplier!=null)
 		{
 			session.delete(supplier);
+			return true;
 		}
-		session.getTransaction().commit();
-		session.close();
-		return true;
+		//session.getTransaction().commit();
+		//session.close();
+		else
+		return false;
 	}
 
 	public List<Supplier> getAll() {
-		Session s=sessionFactory.openSession();
-		s.beginTransaction();
+	//	Session s=sessionFactory.openSession();
+	//	s.beginTransaction();
 	
-		//Session s=this.sessionFactory.getCurrentSession();
+		Session s=this.sessionFactory.getCurrentSession();
 		List<Supplier> l=s.createQuery("from Supplier").list();
 		
 		
-		s.getTransaction().commit();
-	s.close();
+	//	s.getTransaction().commit();
+	//s.close();
 		
 		return l;
 	}
 	
 	public boolean updateSupplier(Supplier supplier)
 	{
-		Session session=sessionFactory.openSession();
-		session.beginTransaction();
-		//Session session=sessionFactory.getCurrentSession();
+		//Session session=sessionFactory.openSession();
+		//session.beginTransaction();
+		try
+		{
+		Session session=sessionFactory.getCurrentSession();
 		session.update(supplier);
-	session.getTransaction().commit();
-	session.close();
+	//session.getTransaction().commit();
+	//session.close();
 		return true;
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return false;
 	}
 
 }

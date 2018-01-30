@@ -32,7 +32,7 @@ public class SupplierTestCase {
 	
 	
 	
-/*	@Test
+	@Test
 	public void testAddSupplier()
 	{
 		supplier = new Supplier();
@@ -40,14 +40,17 @@ public class SupplierTestCase {
 		supplier.setSname("pqr");
 		
 		assertEquals("Inserted!!!",true,supplierDao.insertSupplier(supplier));
-	}*/
+	}
 	
 	@Test
 	public void testUpdateSupplier()
 	{
 	//	supplier = new Supplier();
 		//supplier.setSid(100);
-		Supplier supplier=supplierDao.getSupplierById(123);
+	//	Supplier supplier=supplierDao.getSupplierById(123);
+		
+		supplier=new Supplier();
+		supplier.setSid(111);
 		supplier.setSname("qwe");
 		
 	assertEquals("Something went wrong while updating the existing record!",true,supplierDao.updateSupplier(supplier));
@@ -58,6 +61,6 @@ public class SupplierTestCase {
 	{
 		//Supplier supplier=supplierDao.getSupplierById(123);
 		assertEquals("Something went wrong while deleting the existing record!",
-				true,supplierDao.deleteSupplier(111));
+				true,supplierDao.deleteSupplier(101));
 	}
 }
